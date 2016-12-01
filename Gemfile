@@ -22,6 +22,7 @@ group :development do
   gem 'bummr'
   gem 'bundler-audit'
   gem 'guard-livereload', '>= 2.5.2', require: false
+  gem 'kiba', '~> 1.0.0'
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
