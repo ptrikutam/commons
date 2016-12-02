@@ -1,5 +1,4 @@
 require 'awesome_print'
-require 'epub/parser'
 require 'pry'
 
 require_relative '../../config/environment' # Load Rails
@@ -7,12 +6,4 @@ require_relative 'common'
 
 source(LocalEpubSource, 'lib/etl')
 transform(ExtractBookInfo)
-
-class CreateNewResourceRecord
-  def write(attributes)
-    # From within a rake task, you have the Rails Env so you can call:
-    # record = ActiveModel::Resource.create!(attributes)
-  end
-end
-
 destination(CreateNewResourceRecord)
