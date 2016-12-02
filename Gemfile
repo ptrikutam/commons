@@ -21,6 +21,7 @@ gem 'uglifier', '>= 1.3.0'
 group :development do
   gem 'bummr'
   gem 'bundler-audit'
+  gem 'epub-parser'
   gem 'guard-livereload', '>= 2.5.2', require: false
   gem 'kiba', '~> 1.0.0'
   gem 'listen', '~> 3.0.5'
