@@ -16,6 +16,28 @@ class LocalEpubSource
   attr_reader :folder
 end
 
+class PageContentExtractor
+  def initialize(parsed_book)
+    @book_text = ''
+    @parsed_book = parsed_book
+  end
+
+  def start
+    parsed_book.each_page_on_spine do |page|
+      print '.'
+      parsed_xml = page.content_document.read
+      page_plain = ActionView::Base.full_sanitizer.sanitize(parsed_xml)
+      @book_text = (@book_text || '' ) + page_plain
+    end
+
+    @book_text
+  end
+
+  private
+
+  attr_reader :parsed_book
+end
+
 class ExtractBookInfo
   def initialize
     @book_data = {}
@@ -29,15 +51,9 @@ class ExtractBookInfo
     book_data[:date] = parsed_book.metadata.date.content
     book_data[:publisher] = parsed_book.metadata.publishers.first.content
 
-    parsed_book.each_page_on_spine do |page|
-      print '.'
-      page_plain =
-        ActionView::Base.full_sanitizer.sanitize(page.content_document.read)
+    book_data[:content] = PageContentExtractor.new(parsed_book).start
 
-      book_data[:content] = (book_data[:content] || '') + page_plain
-    end
-
-    book_data
+    ap book_data
   end
 
   private
