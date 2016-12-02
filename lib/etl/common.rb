@@ -40,20 +40,20 @@ end
 
 class ExtractBookInfo
   def initialize
-    @book_data = {}
+    @book_data = { metadata: {} }
   end
 
   def process(input_epub)
     @input_epub = input_epub
 
     book_data[:title] = parsed_book.metadata.title
-    book_data[:creators] = parsed_book.metadata.creators.first.content
-    book_data[:date] = parsed_book.metadata.date.content
-    book_data[:publisher] = parsed_book.metadata.publishers.first.content
+    book_data[:metadata][:creators] = parsed_book.metadata.creators.first.content
+    book_data[:metadata][:date] = parsed_book.metadata.date.content
+    book_data[:metadata][:publisher] =
+      parsed_book.metadata.publishers.first.content
+    book_data[:metadata][:content] = PageContentExtractor.new(parsed_book).start
 
-    book_data[:content] = PageContentExtractor.new(parsed_book).start
-
-    ap book_data
+    book_data
   end
 
   private
