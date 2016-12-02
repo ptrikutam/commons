@@ -2,7 +2,7 @@ require 'awesome_print'
 require 'epub/parser'
 require 'pry'
 
-require_relative '../../config/environment'
+require_relative '../../config/environment' # Load Rails
 require_relative 'common'
 
 source(LocalEpubSource, 'lib/etl')
