@@ -6,5 +6,4 @@ require_relative '../../config/environment' # Load Rails
 require_relative 'common'
 
 source(LocalEpubSource, 'lib/etl')
-
 transform(ExtractBookInfo)
